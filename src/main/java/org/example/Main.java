@@ -1,161 +1,114 @@
-package org.example;
-
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
+        Scanner teclado = new Scanner(System.in);
 
-        Scanner teclado= new Scanner(System.in);
+        String[] candidatos = {"Federico", "Alberto", "Charles"};
+        int[] votos = new int[3]; // Contador de votos por candidato
+        int[] costosCampana = new int[3]; // Costos de campaña por candidato
+        int[] costosPublicidad = {700000, 200000, 600000}; // Costos por tipo de publicidad
+        int totalVotos = 0;
+        int opcion;
 
-        int u;
-        int tv=0;
-        int vc1=0;
-        int vc2=0;
-        int vc3=0;
-        int ci=700000;
-        int cr=200000;
-        int ct=600000;
-        int ctc1=0;
-        int ctc2=0;
-        int ctc3=0;
+        do {
+            System.out.println("\n********** MENÚ *********");
+            System.out.println("1) Votar por un candidato");
+            System.out.println("2) Calcular costo de la campaña");
+            System.out.println("3) Vaciar las urnas");
+            System.out.println("4) Conocer el número total de votos");
+            System.out.println("5) Porcentaje de votos obtenidos por candidato");
+            System.out.println("6) Costo promedio de campaña");
+            System.out.println("7) Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = teclado.nextInt();
 
-        do{
-            System.out.println("**********        MENU           *********");
-            System.out.println(" ");
-            System.out.println(" 1) VOTAR POR UN CANDIDATO");
-            System.out.println(" 2) CALCULAR COSTO DE LA CAMPAÑA");
-            System.out.println(" 3) VACIAR LAS URNAS");
-            System.out.println(" 4) CONOCER EL NÚMERO TOTAL DE VOTOS");
-            System.out.println(" 5) PORCENTAJE DE VOTOS OBTENIDOS * CANDIDATO");
-            System.out.println(" 6) COSTO PROMEDIO DE CAMPAÑA ");
-            System.out.println(" 7) SALIR ");
-            System.out.println(" ");
-            System.out.println(" DIGITE EL NÚMERO DE LA OPCIÓN DESEADA" );
-            u=teclado.nextInt();
-
-            switch(u){
-
-                case 1 :
-                    System.out.println("ESCOJA EL NÚMERO QUE CORRESPONDE AL CANDIDATO POR EL QUE DESEA VOTAR");
-                    System.out.println(" 1) FEDERICO");
-                    System.out.println(" 2) ALBERTO");
-                    System.out.println(" 3) CHARLES");
-                    u=teclado.nextInt();
-
-                    switch(u){
-                        case 1:
-                            System.out.println(" ");
-                            System.out.println(" SU VOTO FUE POR FEDERICO");
-                            System.out.println(" ");
-                            vc1=vc1+1;
-                            tv=tv+vc1;
-                        break;
-
-                        case 2:
-                            System.out.println(" ");
-                            System.out.println(" SU VOTO FUE POR ALBERTO");
-                            System.out.println(" ");
-                            vc2=vc2+1;
-                            tv=tv+vc2;
-                        break;
-
-                        case 3:
-                            System.out.println(" ");
-                            System.out.println(" SU VOTO FUE POR CHARLES");
-                            System.out.println(" ");
-                            vc3=vc3+1;
-                            tv=tv+vc3;
-                        break;
-                        default:
-                            System.out.println(" ");
-
+            switch (opcion) {
+                case 1:
+                    System.out.println("\nSeleccione un candidato:");
+                    for (int i = 0; i < candidatos.length; i++) {
+                        System.out.println((i + 1) + ") " + candidatos[i]);
                     }
+                    int candidato = teclado.nextInt();
 
-                    System.out.println(" ");
-                    System.out.println(" ESCOJA EL MEDIO POR EL CUAL EL VOTO FUE INFLUENCIADO");
-                    System.out.println(" 1) INTERNET");
-                    System.out.println(" 2) RADIO");
-                    System.out.println(" 3) TELEVISIÓN");
-                    u=teclado.nextInt();
+                    if (candidato >= 1 && candidato <= 3) {
+                        votos[candidato - 1]++;
+                        totalVotos++;
 
-                    switch(u){
-                        case 1:
-                            System.out.println(" ");
-                            System.out.println("EL MEDIO ESCOGIDO FUE INTERNET");
-                        break;
+                        System.out.println("\nSeleccione el medio que influyó en el voto:");
+                        System.out.println("1) Internet");
+                        System.out.println("2) Radio");
+                        System.out.println("3) Televisión");
+                        int medio = teclado.nextInt();
 
-                        case 2:
-                            System.out.println(" ");
-                            System.out.println("EL MEDIO ESCOGIDO FUE RADIO");
-                        break;
-
-                        case 3:
-                            System.out.println(" ");
-                            System.out.println("EL MEDIO ESCOGIDO FUE TELEVISIÓN");
-                        break;
-
-                    default:
-                         System.out.println(" ");
-
-                    } break;
+                        if (medio >= 1 && medio <= 3) {
+                            costosCampana[candidato - 1] += costosPublicidad[medio - 1];
+                        }
+                    } else {
+                        System.out.println("Candidato inválido.");
+                    }
+                    break;
 
                 case 2:
-                    System.out.println("ESCOJA EL NÚMERO QUE CORRESPONDE AL CANDIDATO DEL CUAL DESEA CONOCER EL COSTO DE LA CAMPAÑA");
-                    System.out.println(" 1) FEDERICO");
-                    System.out.println(" 2) ALBERTO");
-                    System.out.println(" 3) CHARLES");
-                    u=teclado.nextInt();
-
-                    switch(u){
-                        case 1:
-                        System.out.println("EL COSTO PARA LA CAMPAÑA DE FEDERICO FUE:");
-                        break;
-
-                        case 2:
-                            System.out.println("EL COSTO PARA LA CAMPAÑA DE ALBERTO FUE:");
-                        break;
-
-
-                        case 3:
-                            System.out.println("EL COSTO PARA LA CAMPAÑA DE CHARLES FUE:");
-                        break;
-
-                    default:
-                       System.out.println(" ");
+                    System.out.println("\nSeleccione un candidato para ver su costo de campaña:");
+                    for (int i = 0; i < candidatos.length; i++) {
+                        System.out.println((i + 1) + ") " + candidatos[i]);
                     }
-                break;
+                    candidato = teclado.nextInt();
+                    if (candidato >= 1 && candidato <= 3) {
+                        System.out.println("El costo de campaña de " + candidatos[candidato - 1] + " fue: $" + costosCampana[candidato - 1]);
+                    } else {
+                        System.out.println("Candidato inválido.");
+                    }
+                    break;
 
                 case 3:
-                    vc1=0;
-                    vc2=0;
-                    vc3=0;
-                    System.out.println("LAS URNAS NO TIENEN VOTOS");
-                break;
+                    for (int i = 0; i < 3; i++) {
+                        votos[i] = 0;
+                        costosCampana[i] = 0;
+                    }
+                    totalVotos = 0;
+                    System.out.println("Las urnas han sido vaciadas.");
+                    break;
 
                 case 4:
-                    System.out.println("LA TOTALIDAD DE VOTOS ES:"+tv);
-                break;
+                    System.out.println("El número total de votos es: " + totalVotos);
+                    break;
 
                 case 5:
-                    System.out.println("ESCOJA EL NÚMERO QUE CORRESPONDE AL CANDIDATO DEL CUAL DESEA CONOCER EL PORCENTAJE DE VOTOS OBTENIDOS");
-                    System.out.println(" 1) FEDERICO");
-                    System.out.println(" 2) ALBERTO");
-                    System.out.println(" 3) CHARLES");
-                    u=teclado.nextInt();
-                break;
+                    System.out.println("\nPorcentaje de votos por candidato:");
+                    if (totalVotos > 0) {
+                        for (int i = 0; i < 3; i++) {
+                            double porcentaje = (votos[i] * 100.0) / totalVotos;
+                            System.out.printf("%s: %.2f%% (%d votos)\n", candidatos[i], porcentaje, votos[i]);
+                        }
+                    } else {
+                        System.out.println("No hay votos registrados.");
+                    }
+                    break;
 
                 case 6:
-                    System.out.println("ESCOJA EL NÚMERO QUE CORRESPONDE AL CANDIDATO DEL CUAL DESEA CONOCER EL COSTO PROMEDIO DE LA CAMPAÑA");
-                    System.out.println(" 1) FEDERICO");
-                    System.out.println(" 2) ALBERTO");
-                    System.out.println(" 3) CHARLES");
-                    u=teclado.nextInt();
-                break;
+                    if (totalVotos > 0) {
+                        int costoTotal = 0;
+                        for (int costo : costosCampana) {
+                            costoTotal += costo;
+                        }
+                        int costoPromedio = costoTotal / totalVotos;
+                        System.out.println("El costo promedio de campaña es: $" + costoPromedio);
+                    } else {
+                        System.out.println("No hay votos registrados.");
+                    }
+                    break;
 
-            }break;
+                case 7:
+                    System.out.println("Saliendo...");
+                    break;
 
-        }while(u!=7);
+                default:
+                    System.out.println("Opción inválida. Intente nuevamente.");
+            }
+        } while (opcion != 7);
+
+        teclado.close();
     }
 }
