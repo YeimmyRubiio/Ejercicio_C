@@ -4,14 +4,24 @@ public class Main {
     public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);
 
+        // Lista de nombres de los candidatos para mejorar la organización
         String[] candidatos = {"Federico", "Alberto", "Charles"};
-        int[] votos = new int[3]; // Contador de votos por candidato
-        int[] costosCampana = new int[3]; // Costos de campaña por candidato
-        int[] costosPublicidad = {700000, 200000, 600000}; // Costos por tipo de publicidad
+        
+        // Arreglo para almacenar la cantidad de votos por candidato
+        int[] votos = new int[3]; // Se inicializan en 0 automáticamente
+        
+        // Arreglo para almacenar los costos de campaña por candidato
+        int[] costosCampana = new int[3]; // Se inicializan en 0 automáticamente
+        
+        // Arreglo con los costos fijos por tipo de publicidad (Internet, Radio, Televisión)
+        int[] costosPublicidad = {700000, 200000, 600000};
+        
+        // Variable para almacenar el total de votos
         int totalVotos = 0;
         int opcion;
 
         do {
+            // Se presenta el menú de opciones al usuario
             System.out.println("\n********** MENÚ *********");
             System.out.println("1) Votar por un candidato");
             System.out.println("2) Calcular costo de la campaña");
@@ -25,22 +35,26 @@ public class Main {
 
             switch (opcion) {
                 case 1:
+                    // Opción para votar por un candidato
                     System.out.println("\nSeleccione un candidato:");
                     for (int i = 0; i < candidatos.length; i++) {
                         System.out.println((i + 1) + ") " + candidatos[i]);
                     }
                     int candidato = teclado.nextInt();
 
+                    // Validación de la opción ingresada
                     if (candidato >= 1 && candidato <= 3) {
-                        votos[candidato - 1]++;
-                        totalVotos++;
+                        votos[candidato - 1]++; // Incrementa el contador de votos del candidato
+                        totalVotos++; // Incrementa el contador total de votos
 
+                        // Se pregunta el medio de publicidad que influyó en el voto
                         System.out.println("\nSeleccione el medio que influyó en el voto:");
                         System.out.println("1) Internet");
                         System.out.println("2) Radio");
                         System.out.println("3) Televisión");
                         int medio = teclado.nextInt();
 
+                        // Se valida el medio de publicidad y se suma el costo correspondiente
                         if (medio >= 1 && medio <= 3) {
                             costosCampana[candidato - 1] += costosPublicidad[medio - 1];
                         }
@@ -50,6 +64,7 @@ public class Main {
                     break;
 
                 case 2:
+                    // Opción para ver el costo de campaña de un candidato
                     System.out.println("\nSeleccione un candidato para ver su costo de campaña:");
                     for (int i = 0; i < candidatos.length; i++) {
                         System.out.println((i + 1) + ") " + candidatos[i]);
@@ -63,6 +78,7 @@ public class Main {
                     break;
 
                 case 3:
+                    // Vaciar las urnas (restablecer votos y costos)
                     for (int i = 0; i < 3; i++) {
                         votos[i] = 0;
                         costosCampana[i] = 0;
@@ -72,10 +88,12 @@ public class Main {
                     break;
 
                 case 4:
+                    // Mostrar el número total de votos registrados
                     System.out.println("El número total de votos es: " + totalVotos);
                     break;
 
                 case 5:
+                    // Mostrar el porcentaje de votos obtenidos por cada candidato
                     System.out.println("\nPorcentaje de votos por candidato:");
                     if (totalVotos > 0) {
                         for (int i = 0; i < 3; i++) {
@@ -88,6 +106,7 @@ public class Main {
                     break;
 
                 case 6:
+                    // Calcular y mostrar el costo promedio de la campaña
                     if (totalVotos > 0) {
                         int costoTotal = 0;
                         for (int costo : costosCampana) {
@@ -101,6 +120,7 @@ public class Main {
                     break;
 
                 case 7:
+                    // Salir del programa
                     System.out.println("Saliendo...");
                     break;
 
@@ -109,6 +129,6 @@ public class Main {
             }
         } while (opcion != 7);
 
-        teclado.close();
+        teclado.close(); // Se cierra el scanner para liberar recursos
     }
 }
